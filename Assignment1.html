@@ -1,3 +1,4 @@
+
 <html ng-app="Angular">
     <head>
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.17/angular.min.js"></script>
@@ -9,25 +10,26 @@
             
                 function ($scope) {
                         
-                        myTicket.controller('Cost'
+                        myTicket.controller('Cost');
                         var c = this;
                         
                         c.cost = 1000.1;
                         c.total_bill = true;
                         
                         function update (){
-                            cc.total = parseFloat(c.cost) + c.tax + c.tip.amount;
+                            
+                            c.total = parseFloat(c.cost) + c.tax.amount + c.tip.amount;
                         }
                         
                         $scope.$watch('c.cost', update);
                         $scope.$watch('c.tax', update);
                         $scope.$watch('c.tip', update);
-                        $scope.$watch('c.cost + c.cost * c.tax', update);
+                        $scope.$watch('c.cost + c.tip + c.tax', update);
                         
                         c.bill = 0.0;
                         c.add = function add(){
                             c.bill += c.total;
-                        }
+                        };
                         
                         c.tip_options = [
                             {amount:c.cost * 0.10, name:"10%"},
@@ -62,7 +64,7 @@
                 <button ng-click="c.add()">Add</button>
             </p>
             <p ng-show="c.total_bill">
-                Running total: {{c.final_bill|currency}}
+                Running total: {{c.bill|currency}}
             </p>
         </div>
     </body>
