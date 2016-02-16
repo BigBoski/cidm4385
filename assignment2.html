@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html ng-app="Quiz">
+    <head>
+        <title>Bo's Awesome Quiz</title>
+    </head>
+    <body>
+        
+        <!-- do stuff here -->
+        <div ng-controller="quizController as qc">
+            <button ng-click="qc.getNext()">Next</button>
+            <p>The selected random number is: {{qc.selected_random_number}}</p>
+            
+            <p>The selected question is: {{qc.selected_question.text}}</p>
+            <p>The asnwer to the selected question is: {{qc.selected_question.answer}}</p>
+            <p>student: {{ qc.selected_student.person}}</p>
+            <p>points: {{qc.selected_student.points}}</p>
+            <p>attempts: {{qc.selected_student.attempts}}</p>
+            <button ng-click="qc.answeredCorrectly()">Correct</button>
+        </div>
+        
+        <script src="angular.min.js"></script>
+        <script src="app.js"></script>   
+    </body>
+</html>
+
+            <!--
+            <input type="button" id="btnSearch" value="Search" onclick="Name()" />
+            <p id="message" >{{name}}</p>
+            
+            <div ng-controller="questions as q">
+                <p>
+                    Question: <select ng-model="q.Questions" ng-options="s.name for s in q.Questions_options"></select>
+                </p>
+                
+            <div ng-controller="points as p">
+                <p>
+                    Judgment: <select ng-model="p.points" ng-options="s.name for s in p.points_options"></select>
+                </p>
+                
+                <p>
+                    Total Points: {{p.total}}
+                </p>
+                <p>
+                    Student Answer: <input type="text" placeholder = "Answer">
+                </p>
+        </div>
+        -->
