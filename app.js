@@ -6,6 +6,7 @@ myModule.controller('quizController', ['$scope', function($scope) {
     var qc = this;
     
     //do we need any variables?
+    var answers=[];
     
     //students array
     qc.students = 
@@ -13,10 +14,11 @@ myModule.controller('quizController', ['$scope', function($scope) {
         {
             person: "john",
             points: 0,
-            attempts: 0
+            attempts: 0,
+            
         },
         {
-            person: "bo",
+            person: "Bo",
             points: 0,
             attempts: 0            
         },
@@ -36,10 +38,11 @@ myModule.controller('quizController', ['$scope', function($scope) {
             attempts: 0            
         }        
     ];    
-
+    localStorage["qc.students.points"] = JSON.stringify(qc.students.points);
+qc.students_completed = [];
 
     //questions array
-    qc.questions = 
+    qc.questions =
     [
         {
             text: "What color is blue?",
@@ -54,98 +57,66 @@ myModule.controller('quizController', ['$scope', function($scope) {
             answer: "2"
         },
         {
-            text: "What is the capitol of Texas?",
+           text: "What is the capitol of Texas?",
             answer: "Austin, TX"
         },
         {
-            text: "How flavors are in Dr. Pepper",
+            text: "How many flavors are in Dr. Pepper",
             answer: "23"
         }        
     ];
+qc.questions_completed = [];
 
+    qc.nextquestion = function(){
+        if(qc.questions.length > 0){
+            var index = Math.floor(Math.random() * qc.questions.length);
+            qc.selected_question = qc.questions[index];
+            qc.questions_completed.push(qc.selected_question);
+            qc.questions.splice(index, 1);            
+        }
+        else{
+            qc.questions = qc.questions_completed;
+            qc.questions_completed = [];
+        }
+};
+
+    qc.nextstudent = function(){
+        
+        if(qc.students.length > 0){
+            var index = Math.floor(Math.random() * qc.students.length);
+             
+            qc.selected_student = qc.students[index];
+             
+            qc.students_completed.push(qc.selected_student);
+             
+            qc.students.splice(index, 1);
+            qc.selected_student.attempts++;
+        }
+        else{
+            qc.students = qc.students_completed;
+            qc.students_completed = [];
+            qc.selected_student.attempts++;
+        }
+    };
+// use splice to take out student and question?
     qc.getNext = function(){
         //get a selected question
-        qc.getRandomQuestion();
+        qc.nextquestion();
         
         //get a selected student
-        qc.getRandomStudent();          
+         qc.nextstudent();
         
-    }
-
-    qc.getRandomStudent = function(){
-        qc.selected_random_number = Math.floor(Math.random() * 5);
-        qc.selected_student = qc.students[qc.selected_random_number]; 
-        qc.selected_student.attempts++;
     };
-    
-    qc.getRandomQuestion = function(){
-        qc.selected_random_number = Math.floor(Math.random() * 5);
-        qc.selected_question = qc.questions[qc.selected_random_number];
-    }
-    
-    qc.answeredCorrectly = function(){
-        qc.selected_student.points++;   
-    }
 
+
+    qc.answeredCorrectly = function(){
+        qc.nextquestion();
+        qc.nextstudent();
+        qc.selected_student.points++;
+    };
+
+    qc.getNext();
     
-    //get a selected question
-    qc.getRandomQuestion();
-    
-    //get a selected student
-    qc.getRandomStudent();    
-    
+    // will do the first 5 completely fine then it goes off on random
 
 }]);
-
-
-/*
-function Name() {
-    var myarray = new Array("s1", "s2", "s3");
-    var random = myarray[Math.floor(Math.random() * myarray.length)];
-    document.getElementById("message").innerHTML = random;
-}
-
-myModule.controller('points',
-    function($scope) {
-        var p = this;
-        p.total = 0.0;
-
-        function update() {
-
-            p.total += p.correct;
-        }
-
-        $scope.$watch('p.correct', update);
-
-        p.point_options[{
-                point: 1.0,
-                name: "correct"
-            }, {
-                point: 0.0,
-                name: "wrong"
-            }
-
-        ];
-        p.correct = p.point_options[0];
-
-    }
-
-);
-
-myModule.controller('Questions',
-    function($scope) {
-        var q = this;
-
-        q.question_options = [{
-            name: "q1"
-        }, {
-            name: "q2"
-        }, {
-            name: "q3"
-        }];
-
-        q.question = q.question_options[0];
-    }
-    
-);
-*/
