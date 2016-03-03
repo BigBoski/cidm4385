@@ -21,8 +21,9 @@ function($scope, studentListService, questionListService) {
     });
     
     
+  // I tried figuring out the local storage bit and have not found any1 that could help or any help online.
   
-    /*localStorage["qc.students"] = JSON.stringify(qc.students); // put qc.students array in local storage
+   /* localStorage["qc.students"] = JSON.stringify(qc.students); // put qc.students array in local storage
     qc.ss = JSON.parse(localStorage["qc.students"]);// use qc.ss to access this storage
     
 
@@ -144,6 +145,30 @@ myModule.factory('questionListService', ['$http', function($http){
     return questionListService;
 }]);
 
+
+myModule.factory("LocalStorageService", function($window, $rootScope) {
+    
+    angular.element($window).on('storage', function(event) {
+        if (event.key === 'my-storage') {
+            $rootScope.$apply();
+        }
+    });    
+    
+    return {
+        setData: function(val) {
+            $window.localStorage && $window.localStorage.setItem('my-storage', val);
+            return this;
+        },
+        getData: function() {
+            
+            var val = $window.localStorage && $window.localStorage.getItem('my-storage');
+            
+            var data = angular.fromJson(val);
+            
+            return data; 
+        }
+    };
+});
 
 
 //var mc = this;

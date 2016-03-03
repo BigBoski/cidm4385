@@ -1,26 +1,11 @@
 <!DOCTYPE html>
-<html ng-app="Quiz">
+<html ng-app="localStorage">
     <head>
-        <title>Bo's Awesome Quiz</title>
+
     </head>
     <body>
         
-        <!-- code make sure js is at bottom of body. -->
-        <div ng-controller="quizController as qc">
-            
-            
-            
-            <p>The selected question is: {{qc.selected_question.text}}</p>
-            <p>The asnwer to the selected question is: {{qc.selected_question.answer}}</p>
-            <p>student: {{ qc.selected_student.person}}</p>
-            <p>points: {{qc.selected_student.points}}</p>
-            <p>attempts: {{qc.selected_student.attempts}}</p>
-            <button ng-click="qc.getNext()">Start</button>
-            <button ng-click="qc.answeredCorrectly()">Correct</button>
-            <button ng-click="qc.getNext()">Next</button>
-        </div>
-        
-        <script src="angular.js"></script>
+      
         <script src="app2.js"></script>   
     </body>
 </html>
