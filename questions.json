@@ -1,0 +1,27 @@
+    {
+    "question":
+    [
+        {
+            "text": "What color is blue?",
+            "answer": "Blue"
+        },
+        {
+            "text": "What is 1 + 2?",
+            "answer": "3"
+        },
+        {
+            "text": "What is 4/2?",
+            "answer": "2"
+        },
+        {
+           "text": "What is the capitol of Texas?",
+            "answer": "Austin, TX"
+        },
+        {
+            "text": "How many flavors are in Dr. Pepper",
+            "answer": "23"
+        }        
+    ]
+    }
+    
+   

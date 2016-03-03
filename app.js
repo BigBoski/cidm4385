@@ -38,8 +38,9 @@ myModule.controller('quizController', ['$scope', function($scope) {
             attempts: 0            
         }        
     ];    
-    localStorage["qc.students.points"] = JSON.stringify(qc.students.points);
-qc.students_completed = [];
+    localStorage["qc.students"] = JSON.stringify(qc.students); // put qc.students array in local storage
+    qc.ss = JSON.parse(localStorage["qc.students"]);// use qc.ss to access this storage
+    qc.students_completed = [];
 
     //questions array
     qc.questions =
@@ -67,25 +68,29 @@ qc.students_completed = [];
     ];
 qc.questions_completed = [];
 
+localStorage["qc.questions"] = JSON.stringify(qc.questions);// same as students
+qc.qq = JSON.parse(localStorage["qc.questions"]);
+
+
     qc.nextquestion = function(){
-        if(qc.questions.length > 0){
-            var index = Math.floor(Math.random() * qc.questions.length);
-            qc.selected_question = qc.questions[index];
+        if(qc.qq.length > 0){
+            var index = Math.floor(Math.random() * qc.qq.length); 
+            qc.selected_question = qc.qq[index];
             qc.questions_completed.push(qc.selected_question);
             qc.questions.splice(index, 1);            
         }
         else{
-            qc.questions = qc.questions_completed;
+            qc.qq = qc.questions_completed;
             qc.questions_completed = [];
         }
 };
 
     qc.nextstudent = function(){
         
-        if(qc.students.length > 0){
-            var index = Math.floor(Math.random() * qc.students.length);
+        if(qc.ss.length > 0){
+            var index = Math.floor(Math.random() * qc.ss.length);
              
-            qc.selected_student = qc.students[index];
+            qc.selected_student = qc.ss[index];
              
             qc.students_completed.push(qc.selected_student);
              
@@ -93,7 +98,7 @@ qc.questions_completed = [];
             qc.selected_student.attempts++;
         }
         else{
-            qc.students = qc.students_completed;
+            qc.ss = qc.students_completed;
             qc.students_completed = [];
             qc.selected_student.attempts++;
         }
@@ -112,7 +117,7 @@ qc.questions_completed = [];
     qc.answeredCorrectly = function(){
         qc.nextquestion();
         qc.nextstudent();
-        qc.selected_student.points++;
+        qc.ss.points++;
     };
 
     qc.getNext();
@@ -120,3 +125,4 @@ qc.questions_completed = [];
     // will do the first 5 completely fine then it goes off on random
 
 }]);
+

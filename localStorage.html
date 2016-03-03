@@ -15,12 +15,12 @@
             <p>student: {{ qc.selected_student.person}}</p>
             <p>points: {{qc.selected_student.points}}</p>
             <p>attempts: {{qc.selected_student.attempts}}</p>
+            <button ng-click="qc.getNext()">Start</button>
             <button ng-click="qc.answeredCorrectly()">Correct</button>
             <button ng-click="qc.getNext()">Next</button>
         </div>
         
-        <script src="angular.min.js"></script>
-        <script src="app.js"></script>   
+        <script src="angular.js"></script>
+        <script src="app2.js"></script>   
     </body>
 </html>
-

@@ -1,0 +1,32 @@
+{
+    "people":
+     [
+        {
+            "person": "john",
+            "points": 0,
+            "attempts": 0
+            
+        },
+        {
+            "person": "Bo",
+            "points": 0,
+            "attempts": 0            
+        },
+        {
+            "person": "Mary",
+            "points": 0,
+            "attempts": 0            
+        },
+        {
+            "person": "Brandie",
+            "points": 0,
+            "attempts": 0            
+        },
+        {
+            "person": "Jeff",
+            "points": 0,
+            "attempts": 0            
+        }        
+    ]
+}
+    
